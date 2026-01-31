@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # Nginx Web Server
+  nginx:
+    image: nginx:alpine
+    container_name: billbuddy-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend:/var/www/backend
+      - ./frontend/dist:/var/www/frontend
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - billbuddy-network
+
+  # PHP-FPM Service
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: billbuddy-php
+    restart: unless-stopped
+    working_dir: /var/www/backend
+    volumes:
+      - ./backend:/var/www/backend
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - billbuddy-network
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: billbuddy-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: billbuddy
+      MYSQL_USER: billbuddy
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: rootsecret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - billbuddy-network
+
+  # Redis Cache
+  redis:
+    image: redis:alpine
+    container_name: billbuddy-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - billbuddy-network
+
+  # Node.js for Frontend Development
+  node:
+    image: node:20-alpine
+    container_name: billbuddy-node
+    working_dir: /var/www/frontend
+    volumes:
+      - ./frontend:/var/www/frontend
+    ports:
+      - "5173:5173"
+    command: sh -c "if [ -f package.json ]; then npm install && npm run dev -- --host; else tail -f /dev/null; fi"
+    networks:
+      - billbuddy-network
+
+  # Mailpit for local email testing
+  mailpit:
+    image: axllent/mailpit
+    container_name: billbuddy-mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP
+    networks:
+      - billbuddy-network
+
+networks:
+  billbuddy-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  redis-data:
