@@ -19,7 +19,7 @@ function toggleSidebar() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen">
     <Navbar @toggle-sidebar="toggleSidebar" />
     <Sidebar :open="sidebarOpen" />
 
@@ -27,12 +27,12 @@ function toggleSidebar() {
     <div
       v-if="sidebarOpen"
       @click="sidebarOpen = false"
-      class="fixed inset-0 z-10 bg-black/50 lg:hidden"
+      class="fixed inset-0 z-10 bg-black/30 backdrop-blur-sm lg:hidden transition-opacity"
     />
 
     <!-- Main content -->
     <main class="lg:ml-64 pt-16 min-h-screen">
-      <div class="p-4 lg:p-6">
+      <div class="p-4 lg:p-8">
         <slot />
       </div>
     </main>
