@@ -19,28 +19,28 @@ async function handleLogout() {
 </script>
 
 <template>
-  <nav class="bg-white border-b border-gray-200 fixed w-full z-30 top-0">
+  <nav class="bg-white/80 backdrop-blur-xl border-b border-white/20 fixed w-full z-30 top-0 shadow-sm">
     <div class="px-4 py-3 lg:px-6">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <button
             @click="$emit('toggleSidebar')"
-            class="lg:hidden p-2 rounded-md text-gray-500 hover:bg-gray-100"
+            class="lg:hidden p-2 rounded-xl text-gray-500 hover:bg-white/50 transition-colors"
           >
             <Bars3Icon class="h-6 w-6" />
           </button>
-          <router-link to="/dashboard" class="flex items-center ml-2 lg:ml-0">
-            <span class="text-xl font-bold text-teal-600">BillBuddy</span>
+          <router-link to="/dashboard" class="flex items-center ml-2 lg:ml-0 group">
+            <span class="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent group-hover:from-violet-500 group-hover:to-indigo-500 transition-all">BillBuddy</span>
           </router-link>
         </div>
 
         <div class="flex items-center gap-4">
           <Menu as="div" class="relative">
-            <MenuButton class="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100">
+            <MenuButton class="flex items-center gap-2 p-2 rounded-xl hover:bg-white/50 transition-colors">
               <img
                 v-if="authStore.user?.avatar"
                 :src="authStore.user.avatar"
-                class="h-8 w-8 rounded-full"
+                class="h-8 w-8 rounded-full ring-2 ring-white shadow-sm"
               />
               <UserCircleIcon v-else class="h-8 w-8 text-gray-400" />
               <span class="hidden md:block text-sm font-medium text-gray-700">
@@ -49,14 +49,14 @@ async function handleLogout() {
             </MenuButton>
 
             <MenuItems
-              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 focus:outline-none"
+              class="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-xl shadow-lg shadow-gray-200/50 border border-white/20 py-1 focus:outline-none"
             >
               <MenuItem v-slot="{ active }">
                 <router-link
                   to="/settings"
                   :class="[
-                    active ? 'bg-gray-100' : '',
-                    'flex items-center gap-2 px-4 py-2 text-sm text-gray-700',
+                    active ? 'bg-violet-50 text-violet-700' : '',
+                    'flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 transition-colors',
                   ]"
                 >
                   <Cog6ToothIcon class="h-5 w-5" />
@@ -67,8 +67,8 @@ async function handleLogout() {
                 <button
                   @click="handleLogout"
                   :class="[
-                    active ? 'bg-gray-100' : '',
-                    'flex items-center gap-2 px-4 py-2 text-sm text-gray-700 w-full',
+                    active ? 'bg-violet-50 text-violet-700' : '',
+                    'flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 w-full transition-colors',
                   ]"
                 >
                   <ArrowRightOnRectangleIcon class="h-5 w-5" />

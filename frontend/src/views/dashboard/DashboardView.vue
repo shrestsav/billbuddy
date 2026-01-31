@@ -66,36 +66,36 @@ function formatCurrency(amount: number) {
     </div>
 
     <div v-if="loading" class="flex justify-center py-12">
-      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
     </div>
 
     <template v-else>
       <!-- Balance Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm shadow-gray-200/50 border border-white/50 hover:shadow-md hover:shadow-gray-200/50 transition-all duration-300">
           <div class="flex items-center gap-3 mb-2">
-            <div class="p-2 bg-green-100 rounded-lg">
-              <ArrowDownIcon class="h-5 w-5 text-green-600" />
+            <div class="p-2.5 bg-gradient-to-br from-emerald-400 to-green-500 rounded-xl shadow-sm shadow-green-500/25">
+              <ArrowDownIcon class="h-5 w-5 text-white" />
             </div>
             <span class="text-sm text-gray-600">You are owed</span>
           </div>
-          <p class="text-2xl font-bold text-green-600">{{ formatCurrency(totalOwed) }}</p>
+          <p class="text-2xl font-bold text-emerald-600">{{ formatCurrency(totalOwed) }}</p>
         </div>
 
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm shadow-gray-200/50 border border-white/50 hover:shadow-md hover:shadow-gray-200/50 transition-all duration-300">
           <div class="flex items-center gap-3 mb-2">
-            <div class="p-2 bg-red-100 rounded-lg">
-              <ArrowUpIcon class="h-5 w-5 text-red-600" />
+            <div class="p-2.5 bg-gradient-to-br from-rose-400 to-red-500 rounded-xl shadow-sm shadow-red-500/25">
+              <ArrowUpIcon class="h-5 w-5 text-white" />
             </div>
             <span class="text-sm text-gray-600">You owe</span>
           </div>
-          <p class="text-2xl font-bold text-red-600">{{ formatCurrency(totalOwing) }}</p>
+          <p class="text-2xl font-bold text-rose-600">{{ formatCurrency(totalOwing) }}</p>
         </div>
 
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm shadow-gray-200/50 border border-white/50 hover:shadow-md hover:shadow-gray-200/50 transition-all duration-300">
           <div class="flex items-center gap-3 mb-2">
-            <div class="p-2 bg-gray-100 rounded-lg">
-              <span class="text-lg">$</span>
+            <div class="p-2.5 bg-gradient-to-br from-violet-400 to-indigo-500 rounded-xl shadow-sm shadow-violet-500/25">
+              <span class="text-lg text-white font-medium">$</span>
             </div>
             <span class="text-sm text-gray-600">Net balance</span>
           </div>
@@ -110,12 +110,12 @@ function formatCurrency(amount: number) {
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Groups -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
-          <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm shadow-gray-200/50 border border-white/50">
+          <div class="p-4 border-b border-gray-100 flex justify-between items-center">
             <h2 class="text-lg font-semibold text-gray-900">Your Groups</h2>
             <router-link
               to="/groups/new"
-              class="flex items-center gap-1 text-sm text-teal-600 hover:text-teal-700"
+              class="flex items-center gap-1 text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors"
             >
               <PlusIcon class="h-4 w-4" />
               New Group
@@ -125,7 +125,7 @@ function formatCurrency(amount: number) {
             <div v-if="groupsStore.groups.length === 0" class="text-center py-6 text-gray-500">
               <UserGroupIcon class="h-12 w-12 mx-auto text-gray-300 mb-2" />
               <p>No groups yet</p>
-              <router-link to="/groups/new" class="text-teal-600 hover:underline">
+              <router-link to="/groups/new" class="text-violet-600 hover:underline">
                 Create your first group
               </router-link>
             </div>
@@ -133,10 +133,10 @@ function formatCurrency(amount: number) {
               <li v-for="group in groupsStore.groups.slice(0, 5)" :key="group.id">
                 <router-link
                   :to="`/groups/${group.id}`"
-                  class="flex items-center gap-3 py-3 hover:bg-gray-50 -mx-4 px-4 rounded-lg"
+                  class="flex items-center gap-3 py-3 hover:bg-white/50 -mx-4 px-4 rounded-xl transition-colors"
                 >
-                  <div class="p-2 bg-teal-100 rounded-lg">
-                    <UserGroupIcon class="h-5 w-5 text-teal-600" />
+                  <div class="p-2 bg-gradient-to-br from-violet-400 to-indigo-500 rounded-xl shadow-sm shadow-violet-500/25">
+                    <UserGroupIcon class="h-5 w-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="font-medium text-gray-900 truncate">{{ group.name }}</p>
@@ -150,7 +150,7 @@ function formatCurrency(amount: number) {
             <router-link
               v-if="groupsStore.groups.length > 5"
               to="/groups"
-              class="block text-center text-sm text-teal-600 hover:underline mt-4"
+              class="block text-center text-sm text-violet-600 hover:underline mt-4"
             >
               View all groups
             </router-link>
@@ -158,10 +158,10 @@ function formatCurrency(amount: number) {
         </div>
 
         <!-- Balances -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
-          <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm shadow-gray-200/50 border border-white/50">
+          <div class="p-4 border-b border-gray-100 flex justify-between items-center">
             <h2 class="text-lg font-semibold text-gray-900">Balances</h2>
-            <router-link to="/settlements" class="text-sm text-teal-600 hover:text-teal-700">
+            <router-link to="/settlements" class="text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors">
               Settle up
             </router-link>
           </div>
@@ -206,8 +206,8 @@ function formatCurrency(amount: number) {
       </div>
 
       <!-- Recent Activity -->
-      <div class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200">
-        <div class="p-4 border-b border-gray-200">
+      <div class="mt-6 bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm shadow-gray-200/50 border border-white/50">
+        <div class="p-4 border-b border-gray-100">
           <h2 class="text-lg font-semibold text-gray-900">Recent Activity</h2>
         </div>
         <div class="p-4">
@@ -232,7 +232,7 @@ function formatCurrency(amount: number) {
           </ul>
           <router-link
             to="/activity"
-            class="block text-center text-sm text-teal-600 hover:underline mt-4"
+            class="block text-center text-sm text-violet-600 hover:underline mt-4"
           >
             View all activity
           </router-link>

@@ -2,9 +2,39 @@
 
 /* Custom base styles */
 body {
-  @apply bg-gray-50 text-gray-900 antialiased;
+  @apply text-gray-900 antialiased;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  background-attachment: fixed;
 }
 
 #app {
   @apply min-h-screen;
+}
+
+/* Modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Modern focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-violet-500 ring-offset-2;
 }

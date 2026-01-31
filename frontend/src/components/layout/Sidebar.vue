@@ -35,7 +35,7 @@ const isActive = (href: string) => {
 <template>
   <aside
     :class="[
-      'fixed top-0 left-0 z-20 h-full w-64 pt-16 bg-white border-r border-gray-200 transition-transform lg:translate-x-0',
+      'fixed top-0 left-0 z-20 h-full w-64 pt-16 bg-white/80 backdrop-blur-xl border-r border-white/20 transition-transform duration-300 lg:translate-x-0 shadow-lg shadow-gray-200/20',
       open ? 'translate-x-0' : '-translate-x-full',
     ]"
   >
@@ -45,17 +45,17 @@ const isActive = (href: string) => {
           <router-link
             :to="item.href"
             :class="[
-              'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+              'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
               isActive(item.href)
-                ? 'bg-teal-50 text-teal-700'
-                : 'text-gray-700 hover:bg-gray-100',
+                ? 'bg-gradient-to-r from-violet-500 to-indigo-500 text-white shadow-md shadow-violet-500/25'
+                : 'text-gray-700 hover:bg-white/60 hover:shadow-sm',
             ]"
           >
             <component
               :is="item.icon"
               :class="[
-                'h-5 w-5',
-                isActive(item.href) ? 'text-teal-600' : 'text-gray-400',
+                'h-5 w-5 transition-colors',
+                isActive(item.href) ? 'text-white' : 'text-gray-400',
               ]"
             />
             {{ item.name }}
